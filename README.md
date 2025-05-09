@@ -1,16 +1,36 @@
-# flutter_login
+# Flutter Login App 🛂
 
-A new Flutter project.
+A Flutter app demonstrating **JWT-based login/logout** using the **BLoC pattern**, with support for **token persistence** via `shared_preferences`.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## ✨ Features
 
-A few resources to get you started if this is your first Flutter project:
+- 🔒 JWT Token Authentication
+- 💡 Login and Logout using `AuthenticationBloc` and `LoginBloc`
+- 🔁 Persistent login across app restarts using local storage
+- 🧱 Modular architecture (AuthenticationRepository, UserRepository)
+- 📦 Internal packages for session management
+- 🧪 Form validation using `formz`
+- 🧼 Clean separation of UI, business logic, and data
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+---
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🧩 Architecture Overview
+
+```txt
+main.dart
+ └── App (MultiRepository + Bloc)
+      └── AppView (Handles routing via AuthenticationBloc)
+            ├── LoginPage (LoginBloc)
+            └── HomePage
+
+🔐 Session Management
+Session persistence is handled via a custom internal package: session_manager.
+
+JWT token is saved to SharedPreferences on successful login.
+
+Token is read on app startup via AuthenticationRepository.
+
+On logout, the token is removed and user is redirected to login screen.
+
